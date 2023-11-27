@@ -7,6 +7,7 @@ This is a React.js/Next.js based landing page plug-n-play template, ideal for st
 ### Features
 
 - 📱  Responsive design
+
 - 🔥 [Next.js](https://nextjs.org) for Static Site Generator
 
 - 🎨 Integrate with [Tailwind CSS](https://tailwindcss.com) (w/ JIT mode)
@@ -27,8 +28,23 @@ Built-in feature from Next.js:
 - 💨 Live reload
 - ✅ Cache busting
 
-### Make it your own
+### CI/CD architecture
 
+Platform: Github Actions
+
+The pipeline is triggered by a push commit in `develop` branch. This includes the PRs merged into the branch. `develop` branch is a protected branch also known as the integration branch. All feature branches should be checked out and merged back from `develop` branch after being tested and approved by the relevent code owners. As the frontend is pretty straightforward and does not contain any unit tests at the moment, CI/CD setup performs the following steps:
+
+- Checkout repository
+- Sets up Node version 16
+- Installs dependencies (Also cache them)
+- Builds application
+- Configures AWS credentials
+- Deploys the application on S3
+
+The steps are dependent on each other so if for example a step fails for whatever reason, all the next steps will be skipped. This protects against several problems including deploying corrupted code.
+
+
+### Setup Instructions
 #### 1. Clone repo
 
 ```
